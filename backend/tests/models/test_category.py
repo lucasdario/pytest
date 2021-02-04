@@ -1,108 +1,56 @@
 import sys
+import pytest
 sys.path.append('.')
 from backend.models.base_model import BaseModel
 from backend.models.category import Category
 
-NAME_ = "Móveis"
-DESCRIPTION_ = "Móveis para interior."
+
+@pytest.mark.parametrize("name, description", [
+    ("Vegetais", "Gostosinhos e às vezes verdes."),
+    ("Cristais", " líquidos discóticos fotoisomerizaveis."),
+    ("Frutas", "Coloridas e gostosinhas.")
+])
+def test_instance_category(name, description):
+    category = Category(name, description)
+    assert isinstance(category, BaseModel)
+    assert isinstance(category, Category)
 
 
-def instance_obj():
-    obj = Category(NAME_, DESCRIPTION_)
-    return obj
+@pytest.mark.parametrize("name, description", [
+    ("", "valid description"),
+    ("a" * 200, "valid description"),
+    (" ", "valid description")
+])
+def test_name_not_valid(name, description):
+    with pytest.raises(ValueError):
+        category = Category(name, description)
 
 
-def test_instace_obj():
-    obj = instance_obj()
-    assert isinstance(obj, BaseModel)
-    assert isinstance(obj, Category)
+@pytest.mark.parametrize("name, description", [
+    (10, "valid description"),
+    (5.4, "valid description"),
+    (True, "valid description")
+])
+def test_name_format_not_valid(name, description):
+    with pytest.raises(TypeError):
+        category = Category(name, description)
 
 
-def test_name_null():
-    try:
-        obj = instance_obj()
-        obj.name = None
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, TypeError)
+@pytest.mark.parametrize("name, description", [
+    ("valid name", ""),
+    ("valid name", "a" * 300),
+    ("valid name", " "),
+])
+def test_description_not_valid(name, description):
+    with pytest.raises(ValueError):
+        category = Category(name, description)
 
 
-def test_name_empty():
-    try:
-        obj = instance_obj()
-        obj.name = ''
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, ValueError)
-
-
-def test_name_value_invalid():
-    try:
-        obj = instance_obj()
-        obj.name = ' '
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, ValueError)
-
-
-def test_name_type_invalid():
-    try:
-        obj = instance_obj()
-        obj.name = 10.50
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, TypeError)
-
-
-def test_name_length_invalid():
-    try:
-        obj = instance_obj()
-        obj.name = 'TESTE '*100
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, ValueError)
-
-
-def test_description_null():
-    try:
-        obj = instance_obj()
-        obj.description = None
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, TypeError)
-
-
-def test_description_empty():
-    try:
-        obj = instance_obj()
-        obj.description = ''
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, ValueError)
-
-
-def test_description_value_invalid():
-    try:
-        obj = instance_obj()
-        obj.description = ' '
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, ValueError)
-
-
-def test_description_type_invalid():
-    try:
-        obj = instance_obj()
-        obj.description = 10.50
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, TypeError)
-
-
-def test_description_lenght_invalid():
-    try:
-        obj = instance_obj()
-        obj.description = 'TESTE '*200
-        assert NotImplementedError("Erro não implementado!")
-    except Exception as error:
-        assert isinstance(error, ValueError)
+@pytest.mark.parametrize("name, description", [
+    ("valid name", 10),
+    ("valid name", 5.3),
+    ("valid name", True),
+])
+def test_name_format_not_valid(name, description):
+    with pytest.raises(TypeError):
+        category = Category(name, description)
