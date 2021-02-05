@@ -1,9 +1,9 @@
-import pytest
 import sys
 sys.path.append('.')
-from backend.controllers.base_controller import BaseController
-from backend.controllers.category_controller import CategoryController
 from backend.models.category import Category
+from backend.controllers.category_controller import CategoryController
+from backend.controllers.base_controller import BaseController
+import pytest
 
 
 @pytest.fixture

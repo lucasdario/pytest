@@ -1,8 +1,8 @@
 import sys
-import pytest
 sys.path.append('.')
-from backend.models.base_model import BaseModel
 from backend.models.category import Category
+from backend.models.base_model import BaseModel
+import pytest
 
 
 @pytest.mark.parametrize("name, description", [

@@ -1,9 +1,9 @@
-import pytest
 import sys
 sys.path.append('.')
-from sqlalchemy.orm.exc import UnmappedInstanceError
-from backend.dao.category_dao import CategoryDao
 from backend.models.category import Category
+from backend.dao.category_dao import CategoryDao
+from sqlalchemy.orm.exc import UnmappedInstanceError
+import pytest
 
 
 class TestCategoryDao:
