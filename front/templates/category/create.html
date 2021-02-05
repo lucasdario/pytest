@@ -1,0 +1,12 @@
+{%extends 'base_template.html'%}
+
+{% block body%}
+<div style="padding-top: 2rem;padding-left:2rem">
+    <form method="POST" action="/category/form">
+        <input type="hidden" name="id">
+        <input type="text" name="name" placeholder="Nome da categoria">
+        <input type="text" name="description" placeholder="Descrição da categoria">
+        <input type="submit" name="cadastrar" value="Cadastrar">
+    </form>
+</div>
+{%endblock%}

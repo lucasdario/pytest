@@ -1,0 +1,12 @@
+{%extends 'base_template.html'%}
+
+{% block body%}
+<div style="padding-top: 2rem;padding-left:2rem">
+    <form method="POST" action="/category/create">
+        <input type="hidden" name="id" value="{{obj.id_}}">
+        <input type="text" name="name" value="{{obj.name}}">
+        <input type="text" name="description" value={{obj.description}}>
+        <input type="submit" name="atualizar" value="Atualizar">
+    </form>
+</div>
+{%endblock%}

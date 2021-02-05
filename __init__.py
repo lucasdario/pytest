@@ -1,1 +1,2 @@
-from backend.tests.models.test_category import *
+from front.index import app
+app.run(debug=True)

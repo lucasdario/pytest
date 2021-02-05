@@ -16,7 +16,6 @@ class BaseController:
         raise Exception('Objeto não está no banco de dados.')
 
     def update(self, model: BaseModel) -> BaseModel:
-        self.read_by_id(model.id_)
         return self.__dao.save(model)
 
     def read_all(self):
