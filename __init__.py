@@ -1,2 +1,5 @@
 from front.index import app
-app.run(debug=True)
+from front.api.api import app_api
+
+# app.run(debug=True)
+app_api.run(debug=True)
